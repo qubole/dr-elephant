@@ -40,6 +40,7 @@ publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.
 publishMavenStyle := true
 
 resolvers += (
-    "Local Maven Repository" at "file:///"+Path.userHome.absolutePath+"/.m2/repository"
+//    "Local Maven Repository" at "file:///"+Path.userHome.absolutePath+"/.m2/repository"
+      "Artifactory" at "http://maven-qubole.s3-website-us-east-1.amazonaws.com/maven/release"
 )
 
