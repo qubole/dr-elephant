@@ -19,7 +19,7 @@ import Dependencies._
 
 name := "dr-elephant"
 
-version := "2.0.6-qds"
+version := "2.0.6-qds-0.2.0-SNAPSHOT"
 
 organization := "com.linkedin.drelephant"
 
@@ -40,7 +40,5 @@ publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.
 publishMavenStyle := true
 
 resolvers += (
-//    "Local Maven Repository" at "file:///"+Path.userHome.absolutePath+"/.m2/repository"
-      "Artifactory" at "http://maven-qubole.s3-website-us-east-1.amazonaws.com/maven/release"
+    "QuboleS3" at "http://maven-qubole.s3-website-us-east-1.amazonaws.com/maven/release"
 )
-
