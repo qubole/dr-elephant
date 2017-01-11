@@ -19,8 +19,6 @@ import Dependencies._
 
 name := "dr-elephant"
 
-version := "2.0.6-qds-0.2.0-SNAPSHOT"
-
 organization := "com.linkedin.drelephant"
 
 javacOptions in Compile ++= Seq("-source", "1.8", "-target", "1.8")
