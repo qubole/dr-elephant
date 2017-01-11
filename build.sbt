@@ -35,7 +35,13 @@ unmanagedClasspath in Compile ++= update.value.select(configurationFilter("compi
 
 playJavaSettings
 
-publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
+publishTo :=  {
+  val maven = "s3://maven-qubole/"
+  if (isSnapshot.value)
+    Some("snapshots" at maven + "snapshot") 
+  else
+    Some("releases"  at maven + "release")
+}
 
 publishMavenStyle := true
 
