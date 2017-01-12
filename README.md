@@ -7,6 +7,12 @@
 
 **Dr. Elephant** is a performance monitoring and tuning tool for Hadoop and Spark. It automatically gathers all the metrics, runs analysis on them, and presents them in a simple way for easy consumption. Its goal is to improve developer productivity and increase cluster efficiency by making it easier to tune the jobs. It analyzes the Hadoop and Spark jobs using a set of pluggable, configurable, rule-based heuristics that provide insights on how a job performed, and then uses the results to make suggestions about how to tune the job to make it perform more efficiently.
 
+# Qubole Support
+
+## Release
+
+    sbt release -Daws.accessKeyId=XXXXXX -Daws.secretKey=XXXXXX
+
 ## Documentation
 
 For more information on Dr. Elephant, [see the wiki](https://github.com/linkedin/dr-elephant/wiki).

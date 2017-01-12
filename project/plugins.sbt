@@ -24,3 +24,8 @@ addSbtPlugin("com.typesafe.play" % "sbt-plugin" % Option(System.getProperty("pla
 
 // Jacoco code coverage plugin
 addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
+
+addSbtPlugin("com.frugalmechanic" % "fm-sbt-s3-resolver" % "0.9.0")
+
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.4")
+

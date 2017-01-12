@@ -19,8 +19,6 @@ import Dependencies._
 
 name := "dr-elephant"
 
-version := "2.0.6-qds-0.2.0-SNAPSHOT"
-
 organization := "com.linkedin.drelephant"
 
 javacOptions in Compile ++= Seq("-source", "1.8", "-target", "1.8")
@@ -35,7 +33,13 @@ unmanagedClasspath in Compile ++= update.value.select(configurationFilter("compi
 
 playJavaSettings
 
-publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
+publishTo :=  {
+  val maven = "s3://maven-qubole/"
+  if (isSnapshot.value)
+    Some("snapshots" at maven + "snapshot") 
+  else
+    Some("releases"  at maven + "release")
+}
 
 publishMavenStyle := true
 
