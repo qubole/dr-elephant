@@ -326,7 +326,7 @@ public class TezFetcher implements ElephantFetcher<TezApplicationData> {
         }
       }
 
-      long[] time = new long[] { finishTime - startTime, shuffleTime, mergeTime };
+      long[] time = new long[] { finishTime - startTime, shuffleTime, mergeTime, startTime, finishTime };
 
       return time;
     }

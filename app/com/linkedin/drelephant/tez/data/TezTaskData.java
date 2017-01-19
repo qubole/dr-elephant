@@ -18,73 +18,89 @@ package com.linkedin.drelephant.tez.data;
 
 
 public class TezTaskData {
-    private TezCounterData _counterHolder;
-    private String _taskId;
-    // The successful attempt id
-    private String _attemptId;
-    private long _totalTimeMs = 0;
-    private long _shuffleTimeMs = 0;
-    private long _sortTimeMs = 0;
-    private boolean _sampled = false;
+  private TezCounterData _counterHolder;
+  private String _taskId;
+  // The successful attempt id
+  private String _attemptId;
+  private long _totalTimeMs = 0;
+  private long _shuffleTimeMs = 0;
+  private long _sortTimeMs = 0;
+  private long _startTime = 0;
+  private long _finishTime = 0;
+  private boolean _sampled = false;
 
-    public TezTaskData(TezCounterData counterHolder, long[] time) {
-        this._counterHolder = counterHolder;
-        this._totalTimeMs = time[0];
-        this._shuffleTimeMs = time[1];
-        this._sortTimeMs = time[2];
-        this._sampled = true;
-    }
+  public TezTaskData(TezCounterData counterHolder, long[] time) {
+    this._counterHolder = counterHolder;
+    this._totalTimeMs = time[0];
+    this._shuffleTimeMs = time[1];
+    this._sortTimeMs = time[2];
+    if (time.length > 3)
+      this._startTime = time[3];
+    if (time.length > 4)
+      this._finishTime = time[4];
+    this._sampled = true;
+  }
 
-    public TezTaskData(TezCounterData counterHolder) {
-        this._counterHolder = counterHolder;
-    }
+  public TezTaskData(TezCounterData counterHolder) {
+    this._counterHolder = counterHolder;
+  }
 
-    public TezTaskData(String taskId, String taskAttemptId) {
-        this._taskId = taskId;
-        this._attemptId = taskAttemptId;
-    }
+  public TezTaskData(String taskId, String taskAttemptId) {
+    this._taskId = taskId;
+    this._attemptId = taskAttemptId;
+  }
 
-    public void setCounter(TezCounterData counterHolder) {
-        this._counterHolder = counterHolder;
-        this._sampled = true;
-    }
+  public void setCounter(TezCounterData counterHolder) {
+    this._counterHolder = counterHolder;
+    this._sampled = true;
+  }
 
-    public void setTime(long[] time) {
-        this._totalTimeMs = time[0];
-        this._shuffleTimeMs = time[1];
-        this._sortTimeMs = time[2];
-        this._sampled = true;
-    }
+  public void setTime(long[] time) {
+    this._totalTimeMs = time[0];
+    this._shuffleTimeMs = time[1];
+    this._sortTimeMs = time[2];
+    this._startTime = time[3];
+    this._finishTime = time[3];
+    this._sampled = true;
+  }
 
-    public TezCounterData getCounters() {
-        return _counterHolder;
-    }
+  public TezCounterData getCounters() {
+    return _counterHolder;
+  }
 
-    public long getTotalRunTimeMs() {
-        return _totalTimeMs;
-    }
+  public long getTotalRunTimeMs() {
+    return _totalTimeMs;
+  }
 
-    public long getCodeExecutionTimeMs() {
-        return _totalTimeMs - _shuffleTimeMs - _sortTimeMs;
-    }
+  public long getCodeExecutionTimeMs() {
+    return _totalTimeMs - _shuffleTimeMs - _sortTimeMs;
+  }
 
-    public long getShuffleTimeMs() {
-        return _shuffleTimeMs;
-    }
+  public long getShuffleTimeMs() {
+    return _shuffleTimeMs;
+  }
 
-    public long getSortTimeMs() {
-        return _sortTimeMs;
-    }
+  public long getSortTimeMs() {
+    return _sortTimeMs;
+  }
 
-    public boolean isSampled() {
-        return _sampled;
-    }
+  public boolean isSampled() {
+    return _sampled;
+  }
 
-    public String getTaskId() {
-        return _taskId;
-    }
+  public String getTaskId() {
+    return _taskId;
+  }
 
-    public String getAttemptId() {
-        return _attemptId;
-    }
+  public String getAttemptId() {
+    return _attemptId;
+  }
+
+  public long getStartTime() {
+    return _startTime;
+  }
+
+  public long getFinishTime() {
+    return _finishTime;
+  }
 }
