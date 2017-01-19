@@ -19,11 +19,9 @@ import Dependencies._
 
 name := "dr-elephant"
 
-version := "2.0.6"
-
 organization := "com.linkedin.drelephant"
 
-javacOptions in Compile ++= Seq("-source", "1.6", "-target", "1.6")
+javacOptions in Compile ++= Seq("-source", "1.8", "-target", "1.8")
 
 libraryDependencies ++= dependencies
 
@@ -34,3 +32,17 @@ ivyConfigurations += config("compileonly").hide
 unmanagedClasspath in Compile ++= update.value.select(configurationFilter("compileonly"))
 
 playJavaSettings
+
+publishTo :=  {
+  val maven = "s3://maven-qubole/"
+  if (isSnapshot.value)
+    Some("snapshots" at maven + "snapshot") 
+  else
+    Some("releases"  at maven + "release")
+}
+
+publishMavenStyle := true
+
+resolvers += (
+    "QuboleS3" at "http://maven-qubole.s3-website-us-east-1.amazonaws.com/maven/release"
+)

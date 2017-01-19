@@ -57,6 +57,10 @@
   </fetcher>
   -->
   <fetcher>
+    <applicationtype>tez</applicationtype>
+    <classname>com.linkedin.drelephant.tez.TezFetcher</classname>
+  </fetcher>
+  <fetcher>
     <applicationtype>spark</applicationtype>
     <classname>org.apache.spark.deploy.history.SparkFSFetcher</classname>
     <!--
