@@ -62,6 +62,8 @@ public class TezFetcher implements ElephantFetcher<TezApplicationData> {
       String state = _jsonFactory.getState(dagUrl);
       Properties jobConf = _jsonFactory.getProperties(_urlFactory.getApplicationURL(appId));
       jobData.setConf(jobConf);
+      jobData.setStartTime(_jsonFactory.getDagStartTime(dagUrl));
+      jobData.setFinishTime(_jsonFactory.getDagEndTime(dagUrl));
 
       if (state.equals("SUCCEEDED")) {
         jobData.setSucceeded(true);
@@ -204,6 +206,18 @@ public class TezFetcher implements ElephantFetcher<TezApplicationData> {
       }
 
       return holder;
+    }
+
+    private long getDagStartTime(URL url) throws IOException, AuthenticationException {
+      JsonNode rootNode = ThreadContextMR2.readJsonNode(url);
+      long startTime = rootNode.path("otherinfo").get("startTime").getLongValue();
+      return startTime;
+    }
+
+    private long getDagEndTime(URL url) throws IOException, AuthenticationException {
+      JsonNode rootNode = ThreadContextMR2.readJsonNode(url);
+      long endTime = rootNode.path("otherinfo").get("endTime").getLongValue();
+      return endTime;
     }
 
     private void getTaskDataAll(URL vertexListUrl, String dagId, List<TezTaskData> mapperList,
